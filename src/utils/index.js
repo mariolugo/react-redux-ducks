@@ -1,0 +1,1 @@
+export { mapRoutes, routeTo } from './route';
