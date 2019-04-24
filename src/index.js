@@ -1,21 +1,30 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import "./index.css";
+
 import * as serviceWorker from "./serviceWorker";
 import { createBrowserHistory } from "history";
 import { BrowserRouter } from "react-router-dom";
 
 import { AppLayout } from "./views/layouts";
 
+import { Provider as ReduxProvider } from "react-redux";
+import configureStore from "./state/store";
+
 import routes from "./routes";
 import { mapRoutes } from "./utils";
+
+import "./index.css";
+
+const reduxStore = configureStore(window.REDUX_INITIAL_DATA);
 
 const history = createBrowserHistory();
 
 ReactDOM.render(
-  <BrowserRouter history={history}>
-    <AppLayout>{mapRoutes(routes)}</AppLayout>
-  </BrowserRouter>,
+  <ReduxProvider store={reduxStore}>
+    <BrowserRouter history={history}>
+      <AppLayout>{mapRoutes(routes)}</AppLayout>
+    </BrowserRouter>
+  </ReduxProvider>,
   document.getElementById("root")
 );
 
