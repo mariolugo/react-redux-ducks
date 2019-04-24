@@ -1,16 +1,16 @@
 import * as types from "./types";
 
-export function fetchList(counter) {
+export function fetchList(url) {
   return {
     type: types.FETCH_LIST_START,
-    counter
+    url
   };
 }
 
-export function fetchListSuccess(counter) {
+export function fetchListSuccess(response) {
   return {
     type: types.FETCH_LIST_COMPLETED,
-    counter
+    list: response
   };
 }
 

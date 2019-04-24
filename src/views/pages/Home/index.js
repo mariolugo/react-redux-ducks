@@ -1,28 +1,59 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import logo from "../../../logo.svg";
 import { connect } from "react-redux";
-import { listOperations } from "../../../state/ducks/home";
+import { listOperations } from "../../../state/ducks/list";
 import "./styles.css";
 
 function Home(props) {
   console.log("props", props);
+  let { list } = props;
 
-  let { counter } = props;
+  let pokemons = [];
+  let nextUrl = "http://pokeapi.co/api/v2/pokemon/?limit=30";
+  let prevUrl = "";
 
-  useEffect(() => {}, [counter]);
+  useEffect(() => {
+    props.fetchList(nextUrl);
+  }, []);
 
-  function click() {
-    props.fetchList(counter);
+  function nextPokemons() {
+    props.fetchList(nextUrl);
   }
+
+  function prevPokemons() {
+    props.fetchList(prevUrl);
+  }
+
+  if (typeof list.list !== "undefined") {
+    console.log("list", list.list);
+    pokemons = list.list.results;
+    nextUrl = list.list.next;
+    prevUrl = list.list.previous;
+  }
+
+  console.log("prevUrl", prevUrl);
+  console.log("pokemons", pokemons);
 
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <button onClick={click}>Click {counter}</button>
+        {pokemons.length > 0 &&
+          pokemons.map((pokemon, index) => {
+            return (
+              <div key={index}>
+                <img
+                  src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${index+1}.png`}
+                  crossOrigin="anonymous"
+                  id="sp"
+                />
+                <p>{pokemon.name}</p>
+              </div>
+            );
+          })}
+        <button onClick={nextPokemons}>Get next</button>
+        {prevUrl !== "" &&
+          typeof prevUrl !== "undefined" &&
+          prevUrl !== null && <button onClick={prevPokemons}>Get prev</button>}
       </header>
     </div>
   );
@@ -30,7 +61,7 @@ function Home(props) {
 
 const mapStateToProps = state => {
   return {
-    counter: state.home.list.counter
+    list: state.list.list
   };
 };
 

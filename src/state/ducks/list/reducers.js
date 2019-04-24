@@ -4,7 +4,6 @@ import { createReducer } from "../../utils";
 
 const initState = {
   isFetching: false,
-  counter: 0
 };
 
 const reducers = createReducer(initState)({
@@ -15,7 +14,7 @@ const reducers = createReducer(initState)({
   },
   [types.FETCH_LIST_COMPLETED]: (state, action) => {
     return {
-      counter: action.counter += 1,
+      list: action.list,
       isFetching: false
     };
   },
