@@ -1,4 +1,4 @@
-import { HomePage, PokemonsPage } from '../views/pages';
+import { HomePage, PokemonsPage, ItemsPage } from '../views/pages';
 
 const routes = [
   {
@@ -13,12 +13,12 @@ const routes = [
     component: PokemonsPage,
     exact: true,
   },
-  // {
-  //   path: '/',
-  //   name: 'List',
-  //   component: HomePage,
-  //   exact: true,
-  // },
+  {
+    path: '/items',
+    name: 'Items',
+    component: ItemsPage,
+    exact: true,
+  },
   // {
   //   path: '/',
   //   name: 'Items',
