@@ -3,7 +3,7 @@ import ReactDOM from "react-dom";
 
 import * as serviceWorker from "./serviceWorker";
 import { createBrowserHistory } from "history";
-import { BrowserRouter } from "react-router-dom";
+import { Router } from "react-router-dom";
 
 import { AppLayout } from "./views/layouts";
 
@@ -21,9 +21,9 @@ const history = createBrowserHistory();
 
 ReactDOM.render(
   <ReduxProvider store={reduxStore}>
-    <BrowserRouter history={history}>
+    <Router history={history}>
       <AppLayout>{mapRoutes(routes)}</AppLayout>
-    </BrowserRouter>
+    </Router>
   </ReduxProvider>,
   document.getElementById("root")
 );

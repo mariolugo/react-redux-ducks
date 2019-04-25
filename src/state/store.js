@@ -3,7 +3,11 @@ import { createEpicMiddleware } from "redux-observable";
 import { compose } from "redux";
 import * as reducers from "./ducks";
 import { createLogger } from "./middlewares";
-import { rootEpic } from './epics'
+
+import { combineEpics } from "redux-observable";
+import {listEpic} from "./ducks/list/epics";
+
+const rootEpic = combineEpics(listEpic);
 
 const epicMiddleware = createEpicMiddleware();
 

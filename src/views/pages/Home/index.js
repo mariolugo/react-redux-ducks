@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import { listOperations } from "../../../state/ducks/list";
 import { idFromUrl } from "../../../utils";
@@ -8,10 +8,8 @@ import {
   Button,
   Card,
   CardImg,
-  CardText,
   CardBody,
   CardTitle,
-  CardSubtitle
 } from "reactstrap";
 import "./styles.css";
 
@@ -27,7 +25,7 @@ function Home(props) {
 
   useEffect(() => {
     props.fetchList(nextUrl);
-  }, []);
+  }, [nextUrl,prevUrl]);
 
   function nextPokemons() {
     props.fetchList(nextUrl);
@@ -38,14 +36,10 @@ function Home(props) {
   }
 
   if (typeof list.list !== "undefined") {
-    console.log("list", list.list);
     pokemons = list.list.results;
     nextUrl = list.list.next;
     prevUrl = list.list.previous;
   }
-
-  console.log("prevUrl", prevUrl);
-  console.log("pokemons", pokemons);
 
   return (
     <React.Fragment>
