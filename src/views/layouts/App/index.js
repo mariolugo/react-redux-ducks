@@ -31,6 +31,9 @@ function App({ children }) {
         <NavbarToggler onClick={toggle} />
         <Collapse isOpen={open} navbar>
           <Nav className="ml-auto" navbar>
+          <NavItem>
+              <NavLink href="/">Pokemons</NavLink>
+            </NavItem>
             <NavItem>
               <NavLink href="/components/">Items</NavLink>
             </NavItem>

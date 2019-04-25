@@ -10,7 +10,7 @@ export function fetchList(url) {
 export function fetchListSuccess(response) {
   return {
     type: types.FETCH_LIST_COMPLETED,
-    list: response
+    pokemons: response
   };
 }
 

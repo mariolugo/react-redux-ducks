@@ -14,7 +14,7 @@ const reducers = createReducer(initState)({
   },
   [types.FETCH_LIST_COMPLETED]: (state, action) => {
     return {
-      list: action.list,
+      pokemons: action.pokemons,
       isFetching: false
     };
   },
@@ -27,5 +27,5 @@ const reducers = createReducer(initState)({
 });
 
 export default combineReducers({
-  list: reducers
+  pokemons: reducers
 });

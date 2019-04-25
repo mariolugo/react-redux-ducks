@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
-import { listOperations } from "../../../state/ducks/list";
+import { listOperations } from "../../../state/ducks/pokemons";
 import { idFromUrl } from "../../../utils";
 import {
   Row,
@@ -14,18 +14,17 @@ import {
 import "./styles.css";
 
 function Home(props) {
-  console.log("props", props);
-  let { list } = props;
 
-  const { isFetching } = list;
+  const { fetchList } = props;
+  const { isFetching, pokemons } = props.pokemons;
 
-  let pokemons = [];
+  let pokemonsList = [];
   let nextUrl = "http://pokeapi.co/api/v2/pokemon/?limit=30";
   let prevUrl = "";
 
   useEffect(() => {
-    props.fetchList(nextUrl);
-  }, [nextUrl,prevUrl]);
+    fetchList(nextUrl);
+  }, []);
 
   function nextPokemons() {
     props.fetchList(nextUrl);
@@ -35,10 +34,10 @@ function Home(props) {
     props.fetchList(prevUrl);
   }
 
-  if (typeof list.list !== "undefined") {
-    pokemons = list.list.results;
-    nextUrl = list.list.next;
-    prevUrl = list.list.previous;
+  if (typeof pokemons !== "undefined") {
+    pokemonsList = pokemons.results;
+    nextUrl = pokemons.next;
+    prevUrl = pokemons.previous;
   }
 
   return (
@@ -52,8 +51,8 @@ function Home(props) {
       )}
       {!isFetching && (
         <Row className="Pokemon-list-row">
-          {pokemons.length > 0 &&
-            pokemons.map((pokemon, index) => {
+          {pokemonsList.length > 0 &&
+            pokemonsList.map((pokemon, index) => {
               return (
                 <Col key={index} xs="6" sm="6" md="2">
                   <Card className="Card">
@@ -95,7 +94,7 @@ function Home(props) {
 
 const mapStateToProps = state => {
   return {
-    list: state.list.list
+    pokemons: state.pokemons.pokemons
   };
 };
 

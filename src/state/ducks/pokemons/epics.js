@@ -8,7 +8,7 @@ import * as actions from "./actions";
 
 import { ajax } from "rxjs/ajax";
 
-export const listEpic = action$ =>
+export const pokemonsListEpic = action$ =>
   action$.pipe(
     ofType(types.FETCH_LIST_START),
     mergeMap(action => {
