@@ -14,6 +14,8 @@ import {
   DropdownItem
 } from "reactstrap";
 
+import {Link} from "react-router-dom";
+
 import "bootstrap/dist/css/bootstrap.min.css";
 
 import "./styles.css";
@@ -27,15 +29,15 @@ function App({ children }) {
   return (
     <div className="App">
       <Navbar color="faded" light expand="md" className="App-header">
-        <NavbarBrand href="/">React Reducks Observable</NavbarBrand>
+        <NavbarBrand tag={Link} to="/">React Reducks Observable</NavbarBrand>
         <NavbarToggler onClick={toggle} />
         <Collapse isOpen={open} navbar>
           <Nav className="ml-auto" navbar>
           <NavItem>
-              <NavLink href="/">Pokemons</NavLink>
+              <NavLink tag={Link} to="/pokemons">Pokemons</NavLink>
             </NavItem>
             <NavItem>
-              <NavLink href="/components/">Items</NavLink>
+              <NavLink tag={Link} to="/items">Items</NavLink>
             </NavItem>
             <NavItem>
               <NavLink href="https://github.com/reactstrap/reactstrap">
@@ -53,7 +55,7 @@ function App({ children }) {
           </Nav>
         </Collapse>
       </Navbar>
-      <Container>{children}</Container>
+      <Container className="Content">{children}</Container>
     </div>
   );
 }

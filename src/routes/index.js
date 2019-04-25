@@ -1,4 +1,4 @@
-import { HomePage } from '../views/pages';
+import { HomePage, PokemonsPage } from '../views/pages';
 
 const routes = [
   {
@@ -7,6 +7,24 @@ const routes = [
     component: HomePage,
     exact: true,
   },
+  {
+    path: '/pokemons',
+    name: 'Pokemons',
+    component: PokemonsPage,
+    exact: true,
+  },
+  // {
+  //   path: '/',
+  //   name: 'List',
+  //   component: HomePage,
+  //   exact: true,
+  // },
+  // {
+  //   path: '/',
+  //   name: 'Items',
+  //   component: HomePage,
+  //   exact: true,
+  // }
 //   {
 //     path: '*',
 //     name: '404',
