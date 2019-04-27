@@ -1,9 +1,9 @@
 import reducer from "./reducers";
 
-import * as listOperations from "./operations";
+import * as itemOperations from "./operations";
 
 export {
-    listOperations,
+    itemOperations,
 };
 
 export default reducer;

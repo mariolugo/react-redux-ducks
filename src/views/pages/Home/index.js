@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
-import { listOperations } from "../../../state/ducks/pokemons";
+import { pokemonOperations } from "../../../state/ducks/pokemons";
 import {
   Row,
   Col,
@@ -26,7 +26,7 @@ const mapStateToProps = state => {
 };
 
 const mapDispatchToProps = {
-  fetchList: listOperations.fetchList
+  fetchList: pokemonOperations.fetchList
 };
 
 export default connect(

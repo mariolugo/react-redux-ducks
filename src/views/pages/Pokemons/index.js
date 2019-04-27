@@ -1,11 +1,12 @@
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
-import { listOperations } from "../../../state/ducks/pokemons";
+import { pokemonOperations } from "../../../state/ducks/pokemons";
 import { idFromUrl } from "../../../utils";
 import {
   Row,
   Col,
   Button,
+  Container,
   Card,
   CardImg,
   CardBody,
@@ -50,7 +51,7 @@ function Pokemons(props) {
   }
 
   return (
-    <React.Fragment>
+    <Container >
       {isFetching && (
         <Row>
           <Col>
@@ -97,7 +98,7 @@ function Pokemons(props) {
           </Button>
         </Col>
       </Row>
-    </React.Fragment>
+    </Container>
   );
 }
 
@@ -108,7 +109,7 @@ const mapStateToProps = state => {
 };
 
 const mapDispatchToProps = {
-  fetchList: listOperations.fetchList
+  fetchList: pokemonOperations.fetchList
 };
 
 export default connect(

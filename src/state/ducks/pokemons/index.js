@@ -1,10 +1,10 @@
 import reducer from "./reducers";
 
-import * as listOperations from "./operations";
+import * as pokemonOperations from "./operations";
 import * as epics from './epics';
 
 export {
-    listOperations,
+    pokemonOperations,
     epics
 };
 

@@ -20,3 +20,24 @@ export function fetchListFailed(error) {
     error
   };
 }
+
+export function fetchPokemon(name) {
+  return {
+    type: types.FETCH_POKEMON_START,
+    name
+  };
+}
+
+export function fetchPokemonSuccess(response) {
+  return {
+    type: types.FETCH_POKEMON_COMPLETED,
+    pokemon: response
+  };
+}
+
+export function fetchPokemonFailed(error) {
+  return {
+    type: types.FETCH_POKEMON_FAILED,
+    error
+  };
+}

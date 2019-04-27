@@ -1,10 +1,10 @@
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
-import { listOperations } from "../../../state/ducks/items";
-import { idFromUrl } from "../../../utils";
+import { itemOperations } from "../../../state/ducks/items";
 import {
   Row,
   Col,
+  Container,
   Button,
   Card,
   CardImg,
@@ -49,7 +49,7 @@ function Items(props) {
   }
 
   return (
-    <React.Fragment>
+    <Container>
       {isFetching && (
         <Row>
           <Col>
@@ -94,7 +94,7 @@ function Items(props) {
           </Button>
         </Col>
       </Row>
-    </React.Fragment>
+    </Container>
   );
 }
 
@@ -105,7 +105,7 @@ const mapStateToProps = state => {
 };
 
 const mapDispatchToProps = {
-  fetchList: listOperations.fetchList
+  fetchList: itemOperations.fetchList
 };
 
 export default connect(

@@ -50,7 +50,7 @@ function App({ children }) {
           </Nav>
         </Collapse>
       </Navbar>
-      <Container className="Content">{children}</Container>
+      <div className="Content">{children}</div>
     </div>
   );
 }

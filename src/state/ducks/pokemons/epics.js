@@ -20,11 +20,20 @@ export const pokemonsListEpic = action$ =>
           })
         ); // get the data and extract only the results
     }),
-    catchError(error =>
-      of({
-        type: types.FETCH_LIST_FAILED,
-        payload: "error",
-        error: true
-      })
-    )
+    catchError(error => of(actions.fetchListFailed(error)))
+  );
+
+export const pokemonDetailEpic = action$ =>
+  action$.pipe(
+    ofType(types.FETCH_POKEMON_START),
+    mergeMap(action => {
+      return ajax
+        .getJSON(`https://pokeapi.co/api/v2/pokemon/${action.name}/`)
+        .pipe(
+          map(response => {
+            return actions.fetchPokemonSuccess(response);
+          })
+        );
+    }),
+    catchError(error => of(actions.fetchPokemonFailed(error)))
   );

@@ -3,7 +3,7 @@ import * as types from "./types";
 import { createReducer } from "../../utils";
 
 const initState = {
-  isFetching: false,
+  isFetching: false
 };
 
 const reducers = createReducer(initState)({
@@ -19,6 +19,23 @@ const reducers = createReducer(initState)({
     };
   },
   [types.FETCH_LIST_FAILED]: (state, action) => {
+    return {
+      error: action.error,
+      isFetching: false
+    };
+  },
+  [types.FETCH_POKEMON_START]: (state, action) => {
+    return {
+      isFetching: true
+    };
+  },
+  [types.FETCH_POKEMON_COMPLETED]: (state, action) => {
+    return {
+      pokemon: action.pokemon,
+      isFetching: false
+    };
+  },
+  [types.FETCH_POKEMON_FAILED]: (state, action) => {
     return {
       error: action.error,
       isFetching: false
