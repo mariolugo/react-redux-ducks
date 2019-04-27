@@ -39,11 +39,6 @@ function App({ children }) {
             <NavItem>
               <NavLink tag={Link} to="/items">Items</NavLink>
             </NavItem>
-            <NavItem>
-              <NavLink href="https://github.com/reactstrap/reactstrap">
-                Locations
-              </NavLink>
-            </NavItem>
             <UncontrolledDropdown nav inNavbar>
               <DropdownToggle nav caret>
                 More

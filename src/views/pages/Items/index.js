@@ -11,6 +11,7 @@ import {
   CardBody,
   CardTitle,
 } from "reactstrap";
+import {Link} from "react-router-dom";
 import "./styles.css";
 
 function Items(props) {
@@ -18,16 +19,18 @@ function Items(props) {
   const { fetchList } = props;
   const { isFetching, items } = props.items;
 
+  let masterUrl = "http://pokeapi.co/api/v2/item/?limit=30"
   let itemsList = [];
-  let nextUrl = "http://pokeapi.co/api/v2/item/?limit=30";
+  let nextUrl = masterUrl;
   let prevUrl = "";
 
   useEffect(() => {
-    fetchList(nextUrl);
-
+    if (nextUrl === masterUrl) {
+      fetchList(nextUrl);
+    }
     //this works as componentWillUnmount, set the original url
     return () => {
-      nextUrl = "http://pokeapi.co/api/v2/item/?limit=30";
+      nextUrl = masterUrl;
     }
   }, [nextUrl]);
 
@@ -69,7 +72,7 @@ function Items(props) {
                     />
                     <CardBody>
                       <CardTitle className="Card-title">{item.name}</CardTitle>
-                      <Button color="primary">View Details</Button>
+                      <Button tag={Link} to={`/item/${item.name}`} color="primary">View Details</Button>
                     </CardBody>
                   </Card>
                 </Col>

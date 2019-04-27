@@ -11,6 +11,7 @@ import {
   CardBody,
   CardTitle,
 } from "reactstrap";
+import {Link} from "react-router-dom";
 import "./styles.css";
 
 function Pokemons(props) {
@@ -18,16 +19,19 @@ function Pokemons(props) {
   const { fetchList } = props;
   const { isFetching, pokemons } = props.pokemons;
 
+  let masterUrl = "http://pokeapi.co/api/v2/pokemon/?limit=30"
   let pokemonsList = [];
-  let nextUrl = "http://pokeapi.co/api/v2/pokemon/?limit=30";
+  let nextUrl = masterUrl;
   let prevUrl = "";
 
   useEffect(() => {
-    fetchList(nextUrl);
+    if (nextUrl === masterUrl) {
+      fetchList(nextUrl);
+    }
 
     //this works as componentWillUnmount, set the original url
     return () => {
-      nextUrl = "http://pokeapi.co/api/v2/pokemon/?limit=30";
+      nextUrl = masterUrl;
     }
   }, [nextUrl]);
 
@@ -71,7 +75,7 @@ function Pokemons(props) {
                     />
                     <CardBody>
                       <CardTitle className="Card-title">{pokemon.name}</CardTitle>
-                      <Button color="primary">View Details</Button>
+                      <Button tag={Link} to={`/pokemon/${pokemon.name}`} color="primary">View Details</Button>
                     </CardBody>
                   </Card>
                 </Col>
