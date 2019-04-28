@@ -23,6 +23,23 @@ const reducers = createReducer(initState)({
       error: action.error,
       isFetching: false
     };
+  },
+  [types.FETCH_ITEM_START]: (state, action) => {
+    return {
+      isFetching: true
+    };
+  },
+  [types.FETCH_ITEM_COMPLETED]: (state, action) => {
+    return {
+      item: action.item,
+      isFetching: false
+    };
+  },
+  [types.FETCH_ITEM_FAILED]: (state, action) => {
+    return {
+      error: action.error,
+      isFetching: false
+    };
   }
 });
 

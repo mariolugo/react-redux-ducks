@@ -18,14 +18,18 @@ import "./styles.css";
 function Pokemons(props) {
 
   const { fetchList } = props;
+  //isFetching variable works like a loading
   const { isFetching, pokemons } = props.pokemons;
 
-  let masterUrl = "http://pokeapi.co/api/v2/pokemon/?limit=30"
+  //master url to get the pokemons
+  let masterUrl = "http://pokeapi.co/api/v2/pokemon/?limit=30";
   let pokemonsList = [];
   let nextUrl = masterUrl;
   let prevUrl = "";
 
   useEffect(() => {
+    //if nextUrl and masterUrl are equal, fetch the pokemons
+    //this prevents fetching the next pokemons when accessing this view
     if (nextUrl === masterUrl) {
       fetchList(nextUrl);
     }
@@ -34,16 +38,20 @@ function Pokemons(props) {
     return () => {
       nextUrl = masterUrl;
     }
+    //only re-render when nextUrl changes
   }, [nextUrl]);
 
+  //get next pokemons
   function nextPokemons() {
     props.fetchList(nextUrl);
   }
 
+  //get prev pokemons
   function prevPokemons() {
     props.fetchList(prevUrl);
   }
 
+  //if items is loaded, get item list, nextUrl and prevUrl
   if (typeof pokemons !== "undefined") {
     pokemonsList = pokemons.results;
     nextUrl = pokemons.next;

@@ -12,7 +12,11 @@ function PokemonDetail(props) {
   const { name } = params;
   const { isFetching } = pokemon;
   const pokemonDetails = pokemon.pokemon;
+
+  //image of pokemon to get its palette
   const image = new Image();
+  //the server has "Access-Control-Allow-Origin "*"", so we need to set
+  //crossOrigin to Anonymous
   image.crossOrigin = "Anonymous";
 
   console.log("pokemonDetails", pokemonDetails);
@@ -25,23 +29,29 @@ function PokemonDetail(props) {
     spriteBack = pokemonDetails.sprites["back_default"];
   }
 
+  //state variables
   const [img, setImg] = useState();
+  const [backImg, setBackImg] = useState();
   const [palette, setPalette] = useState();
 
   useEffect(() => {
-    if (typeof img === "undefined") {
+    // if images are undefined, fetch pokemon details once
+    // so it will no re-fetch in the re-render
+    if (typeof img === "undefined" && typeof backImg === "undefined") {
       fetchPokemonDetails(name);
     }
 
+    // wait until sprite is loaded and palette undefined to get the palette
     if (typeof sprite !== "undefined" && typeof palette === "undefined") {
       image.src = sprite;
       image.onload = function() {
-        // The image *must* be loaded before calling `getImagePalette`
+        //set palette state with the getImagePalette function, wait until
+        //image is loaded completely
         setPalette(getImagePalette(image));
       };
     }
-
-  }, [img, palette]);
+    //component will only re-render when this variables changes
+  }, [img, palette, backImg]);
 
   return (
     <div>
@@ -64,14 +74,19 @@ function PokemonDetail(props) {
             <Container fluid>
               <img
                 src={sprite}
+                alt={`${pokemonDetails.name} image`}
                 ref={img => {
                   setImg(img);
                 }}
               />
               <img
                 src={spriteBack}
+                alt={`${pokemonDetails.name} image`}
+                ref={img => {
+                  setBackImg(img);
+                }}
               />
-              
+
               <h1
                 className="Pokemon-name"
                 style={{
@@ -108,12 +123,14 @@ function PokemonDetail(props) {
   );
 }
 
+//get the pokemon state and map it to props
 const mapStateToProps = state => {
   return {
     pokemon: state.pokemons.pokemons
   };
 };
 
+//dispatch actions
 const mapDispatchToProps = {
   fetchPokemonDetails: pokemonOperations.fetchPokemon
 };

@@ -28,3 +28,18 @@ export const itemsListEpic = action$ =>
       })
     )
   );
+
+  export const itemDetailEpic = action$ =>
+  action$.pipe(
+    ofType(types.FETCH_ITEM_START),
+    mergeMap(action => {
+      return ajax
+        .getJSON(`https://pokeapi.co/api/v2/item/${action.name}/`)
+        .pipe(
+          map(response => {
+            return actions.fetchItemSuccess(response);
+          })
+        );
+    }),
+    catchError(error => of(actions.fetchItemFailed(error)))
+  );

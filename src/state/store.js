@@ -6,9 +6,14 @@ import { createLogger } from "./middlewares";
 
 import { combineEpics } from "redux-observable";
 import { pokemonsListEpic, pokemonDetailEpic } from "./ducks/pokemons/epics";
-import { itemsListEpic } from "./ducks/items/epics";
+import { itemsListEpic, itemDetailEpic } from "./ducks/items/epics";
 
-const rootEpic = combineEpics(pokemonsListEpic, pokemonDetailEpic, itemsListEpic);
+const rootEpic = combineEpics(
+  pokemonsListEpic,
+  pokemonDetailEpic,
+  itemsListEpic,
+  itemDetailEpic
+);
 
 const epicMiddleware = createEpicMiddleware();
 

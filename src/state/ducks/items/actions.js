@@ -20,3 +20,24 @@ export function fetchListFailed(error) {
     error
   };
 }
+
+export function fetchItem(name) {
+  return {
+    type: types.FETCH_ITEM_START,
+    name
+  };
+}
+
+export function fetchItemSuccess(response) {
+  return {
+    type: types.FETCH_ITEM_COMPLETED,
+    item: response
+  };
+}
+
+export function fetchItemFailed(error) {
+  return {
+    type: types.FETCH_ITEM_FAILED,
+    error
+  };
+}
