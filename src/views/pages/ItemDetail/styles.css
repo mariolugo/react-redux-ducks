@@ -1,3 +1,15 @@
 .Item-name {
     text-transform: capitalize;
 }
+
+.Item-image{
+    width: 100px;
+}
+
+.Item-att-title{
+    text-align: left;
+}
+
+.Item-row {
+    margin-top: 20px;
+}

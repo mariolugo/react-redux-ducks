@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import { pokemonOperations } from "../../../state/ducks/pokemons";
-import { Row, Col, Badge } from "reactstrap";
-import { Jumbotron, Container } from "reactstrap";
+import { PokemonDetailsComponent, LoadingComponent } from "../../../components";
 import getImagePalette from "image-palette-core";
 import "./styles.css";
 
@@ -55,69 +54,16 @@ function PokemonDetail(props) {
 
   return (
     <div>
-      {isFetching && (
-        <Row>
-          <Col>
-            <p>Loading pokemon details...</p>
-          </Col>
-        </Row>
-      )}
+      {isFetching && <LoadingComponent text={"Loading pokemon details..."} />}
       {!isFetching && typeof pokemonDetails !== "undefined" && (
-        <div>
-          <Jumbotron
-            className="Pokemon-hero"
-            style={{
-              backgroundColor:
-                typeof palette !== "undefined" ? palette.backgroundColor : ""
-            }}
-          >
-            <Container fluid>
-              <img
-                src={sprite}
-                alt={`${pokemonDetails.name} image`}
-                ref={img => {
-                  setImg(img);
-                }}
-              />
-              <img
-                src={spriteBack}
-                alt={`${pokemonDetails.name} image`}
-                ref={img => {
-                  setBackImg(img);
-                }}
-              />
-
-              <h1
-                className="Pokemon-name"
-                style={{
-                  color: typeof palette !== "undefined" ? palette.color : ""
-                }}
-              >
-                {pokemonDetails.name}
-              </h1>
-              <h3>
-                {pokemonDetails.types.map((types, i) => {
-                  return (
-                    <span key={i}>
-                      <Badge
-                        color="secondary"
-                        style={{
-                          backgroundColor:
-                            typeof palette !== "undefined"
-                              ? palette.alternativeColor
-                              : "",
-                          color: "black"
-                        }}
-                      >
-                        {types.type.name}
-                      </Badge>{" "}
-                    </span>
-                  );
-                })}
-              </h3>
-            </Container>
-          </Jumbotron>
-        </div>
+        <PokemonDetailsComponent
+          palette={palette}
+          setImg={setImg}
+          setBackImg={setBackImg}
+          pokemonDetails={pokemonDetails}
+          sprite={sprite}
+          spriteBack={spriteBack}
+        />
       )}
     </div>
   );

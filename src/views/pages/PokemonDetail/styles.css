@@ -1,3 +1,11 @@
 .Pokemon-name {
     text-transform: capitalize;
 }
+
+.Pokemon-att-title{
+    text-align: left;
+}
+
+.Pokemon-row {
+    margin-top: 20px;
+}

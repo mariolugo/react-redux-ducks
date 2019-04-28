@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import { itemOperations } from "../../../state/ducks/items";
-import { Row, Col, Badge } from "reactstrap";
-import { Jumbotron, Container } from "reactstrap";
 import getImagePalette from "image-palette-core";
+import { ItemDetailsComponent, LoadingComponent } from "../../../components";
 import "./styles.css";
 
 function ItemDefaul(props) {
@@ -52,60 +51,14 @@ function ItemDefaul(props) {
 
   return (
     <div>
-      {isFetching && (
-        <Row>
-          <Col>
-            <p>Loading item details...</p>
-          </Col>
-        </Row>
-      )}
+      {isFetching && <LoadingComponent text={"Loading item details..."} />}
       {!isFetching && typeof itemDetails !== "undefined" && (
-        <div>
-          <Jumbotron
-            className="Pokemon-hero"
-            style={{
-              backgroundColor:
-                typeof palette !== "undefined" ? palette.backgroundColor : ""
-            }}
-          >
-            <Container fluid>
-              <img
-                src={sprite}
-                alt={`${itemDetails.name} image`}
-                ref={img => {
-                  setImg(img);
-                }}
-              />
-              <h1
-                className="Item-name"
-                style={{
-                  color: typeof palette !== "undefined" ? palette.color : ""
-                }}
-              >
-                {itemDetails.name}
-              </h1>
-              <h3>
-                <span>
-                  <Badge
-                    color="secondary"
-                    style={{
-                      backgroundColor:
-                        typeof palette !== "undefined"
-                          ? palette.alternativeColor
-                          : "",
-                      color:
-                        typeof palette !== "undefined"
-                          ? palette.backgroundColor
-                          : ""
-                    }}
-                  >
-                    {itemDetails.category.name}
-                  </Badge>{" "}
-                </span>
-              </h3>
-            </Container>
-          </Jumbotron>
-        </div>
+        <ItemDetailsComponent
+          palette={palette}
+          setImg={setImg}
+          itemDetails={itemDetails}
+          sprite={sprite}
+        />
       )}
     </div>
   );

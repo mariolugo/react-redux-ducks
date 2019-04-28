@@ -9,19 +9,23 @@ import {
   Card,
   CardImg,
   CardBody,
-  CardTitle,
+  CardTitle
 } from "reactstrap";
-import {Link} from "react-router-dom";
+import {
+  PaginationButtons,
+  LoadingComponent,
+  ListComponent
+} from "../../../components";
+import { Link } from "react-router-dom";
 import "./styles.css";
 
 function Items(props) {
-
   const { fetchList } = props;
   //isFetching variable works like a loading
   const { isFetching, items } = props.items;
 
   //master url of the items
-  let masterUrl = "http://pokeapi.co/api/v2/item/?limit=30"
+  let masterUrl = "http://pokeapi.co/api/v2/item/?limit=30";
   let itemsList = [];
   let nextUrl = masterUrl;
   let prevUrl = "";
@@ -35,7 +39,7 @@ function Items(props) {
     //this works as componentWillUnmount, set the original url
     return () => {
       nextUrl = masterUrl;
-    }
+    };
   }, [nextUrl]);
 
   //get next items
@@ -57,50 +61,14 @@ function Items(props) {
 
   return (
     <Container>
-      {isFetching && (
-        <Row>
-          <Col>
-            <p>Loading items...</p>
-          </Col>
-        </Row>
-      )}
-      {!isFetching && (
-        <Row className="Item-list-row">
-          {itemsList.length > 0 &&
-            itemsList.map((item, index) => {
-              return (
-                <Col key={index} xs="6" sm="6" md="2">
-                  <Card className="Card">
-                    <CardImg
-                      top
-                      width="100%"
-                      src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/${item.name}.png`}
-                      alt={`Item ${item.name} image`}
-                    />
-                    <CardBody>
-                      <CardTitle className="Card-title">{item.name}</CardTitle>
-                      <Button tag={Link} to={`/item/${item.name}`} color="primary">View Details</Button>
-                    </CardBody>
-                  </Card>
-                </Col>
-              );
-            })}
-        </Row>
-      )}
-      <Row className="Buttons-row">
-        <Col>
-          {prevUrl !== "" &&
-            typeof prevUrl !== "undefined" &&
-            prevUrl !== null && (
-              <Button color="primary" onClick={prevItems}>
-                Get prev
-              </Button>
-            )}{" "}
-          <Button color="primary" onClick={nextItems}>
-            Get next
-          </Button>
-        </Col>
-      </Row>
+      {isFetching && <LoadingComponent text={"Loading items..."} />}
+      {!isFetching && <ListComponent type={"items"} list={itemsList} />}
+      <PaginationButtons
+        prevUrl={prevUrl}
+        nextUrl={nextUrl}
+        prev={prevItems}
+        next={nextItems}
+      />
     </Container>
   );
 }

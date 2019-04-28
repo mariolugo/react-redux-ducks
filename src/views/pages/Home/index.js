@@ -1,35 +1,25 @@
-import React, { useEffect } from "react";
-import { connect } from "react-redux";
-import { pokemonOperations } from "../../../state/ducks/pokemons";
-import {
-  Row,
-  Col,
-} from "reactstrap";
+import React from "react";
+import { Row, Col, Container, Button } from "reactstrap";
+import {Link} from "react-router-dom";
 import "./styles.css";
 
 function Home(props) {
   return (
-    <React.Fragment>
+    <Container className="Home">
       <Row className="Buttons-row">
         <Col>
-          <p>Hola</p>
+          <h1>Welcome to the Reducks Observable Pokedex!</h1>
+          <Button tag={Link} to="/pokemons" color="primary">View pokemons</Button>{" "}
+          <Button tag={Link} to="/items" color="primary">View items</Button>
         </Col>
       </Row>
-    </React.Fragment>
+      <Row className="Buttons-row">
+        <Col>
+          <h1>Simple Redux Form Asynchronous Validation</h1>
+        </Col>
+      </Row>
+    </Container>
   );
 }
 
-const mapStateToProps = state => {
-  return {
-    pokemons: state.pokemons.pokemons
-  };
-};
-
-const mapDispatchToProps = {
-  fetchList: pokemonOperations.fetchList
-};
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Home);
+export default Home;
