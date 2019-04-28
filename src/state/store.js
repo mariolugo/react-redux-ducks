@@ -3,6 +3,7 @@ import { createEpicMiddleware } from "redux-observable";
 import { compose } from "redux";
 import * as reducers from "./ducks";
 import { createLogger } from "./middlewares";
+import { reducer as reduxFormReducer } from 'redux-form';
 
 import { combineEpics } from "redux-observable";
 import { pokemonsListEpic, pokemonDetailEpic } from "./ducks/pokemons/epics";
@@ -19,8 +20,14 @@ const epicMiddleware = createEpicMiddleware();
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
+const formReducer = {
+  form: reduxFormReducer
+}
 export default function configureStore(initialState) {
-  const rootReducer = combineReducers(reducers);
+  const rootReducer = combineReducers({
+    ...reducers,
+    ...formReducer
+  });
 
   const store = createStore(
     rootReducer,

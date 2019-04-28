@@ -1,3 +1,7 @@
 .Home{
   padding-top: 40px;
 }
+
+.Form-row{
+  max-width: 300px;
+}
