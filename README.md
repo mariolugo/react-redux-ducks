@@ -36,9 +36,9 @@ http://localhost:3000
 │   │   │   │   └── types.js # types used for actions and reducers
 │   │   │   └── items #items redux logic (items list and item)
 │   │   ├── middlewares # logger middleware for prettify actions
-│   │   ├── utils 
+│   │   ├── utils # create reducer logic
 │   │   └── store.js #set up the application store for the provider
-│   ├── utils # create reducer logic
+│   ├── utils 
 │   └── views 
 │       ├── layouts #global layout 
 │       └── pages #all pages
