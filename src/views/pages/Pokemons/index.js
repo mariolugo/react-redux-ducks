@@ -15,7 +15,7 @@ function Pokemons(props) {
   const { isFetching, pokemons } = props.pokemons;
 
   //master url to get the pokemons
-  let masterUrl = "http://pokeapi.co/api/v2/pokemon/?limit=30";
+  let masterUrl = "https://pokeapi.co/api/v2/pokemon/?limit=30";
   let pokemonsList = [];
   let nextUrl = masterUrl;
   let prevUrl = "";

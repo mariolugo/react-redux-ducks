@@ -12,7 +12,7 @@ import {
 import { Link } from "react-router-dom";
 import { idFromUrl } from "../../utils";
 
-function List({ list, type }) {
+function List({ list = [], type }) {
   return (
     <Row className="List-row">
       {list.length > 0 &&

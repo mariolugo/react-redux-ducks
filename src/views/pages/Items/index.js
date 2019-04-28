@@ -25,7 +25,7 @@ function Items(props) {
   const { isFetching, items } = props.items;
 
   //master url of the items
-  let masterUrl = "http://pokeapi.co/api/v2/item/?limit=30";
+  let masterUrl = "https://pokeapi.co/api/v2/item/?limit=30";
   let itemsList = [];
   let nextUrl = masterUrl;
   let prevUrl = "";

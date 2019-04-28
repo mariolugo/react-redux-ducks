@@ -18,7 +18,8 @@
     "redux-form": "^8.2.0",
     "redux-form-website-template": "^1.0.7",
     "redux-observable": "^1.1.0",
-    "rxjs": "^6.5.1"
+    "rxjs": "^6.5.1",
+    "xmlhttprequest": "^1.8.0"
   },
   "scripts": {
     "start": "react-scripts start",
