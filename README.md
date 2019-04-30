@@ -14,6 +14,11 @@ yarn
 
 ## Usage
 
+Run:
+```bash
+yarn start
+```
+
 Go to:
 ```bash
 http://localhost:3000
